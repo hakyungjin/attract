@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, Send } from 'lucide-react';
 
 function ChatDetailView({ chat, messages, onBack, onSendMessage }) {
   const [messageInput, setMessageInput] = useState('');
+  const messagesEndRef = useRef(null);
+
+  // 메시지가 추가되면 자동 스크롤
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   const handleSend = () => {
     if (messageInput.trim()) {
@@ -37,27 +43,30 @@ function ChatDetailView({ chat, messages, onBack, onSendMessage }) {
             <p>대화를 시작해보세요! 👋</p>
           </div>
         ) : (
-          messages.map(message => (
-            <div
-              key={message.id}
-              className={`flex ${message.sender === 'me' ? 'justify-end' : 'justify-start'}`}
-            >
-              <div className="flex flex-col max-w-xs">
-                <div
-                  className={`rounded-2xl px-4 py-2 ${
-                    message.sender === 'me'
-                      ? 'bg-pink-500 text-white rounded-br-none'
-                      : 'bg-gray-200 text-gray-800 rounded-bl-none'
-                  }`}
-                >
-                  {message.text}
+          <>
+            {messages.map(message => (
+              <div
+                key={message.id}
+                className={`flex ${message.sender === 'me' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div className="flex flex-col max-w-xs">
+                  <div
+                    className={`rounded-2xl px-4 py-2 ${
+                      message.sender === 'me'
+                        ? 'bg-pink-500 text-white rounded-br-none'
+                        : 'bg-gray-200 text-gray-800 rounded-bl-none'
+                    }`}
+                  >
+                    {message.text}
+                  </div>
+                  <span className="text-xs text-gray-400 mt-1 px-2">
+                    {message.timestamp}
+                  </span>
                 </div>
-                <span className="text-xs text-gray-400 mt-1 px-2">
-                  {message.timestamp}
-                </span>
               </div>
-            </div>
-          ))
+            ))}
+            <div ref={messagesEndRef} />
+          </>
         )}
       </div>
 
