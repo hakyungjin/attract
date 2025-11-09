@@ -1,42 +1,110 @@
-import React, { useState } from 'react';
-import ProfilesView from './components/ProfilesView';
-import ProfileDetailView from './components/ProfileDetailView';
-import ChatListView from './components/ChatListView';
-import ChatDetailView from './components/ChatDetailView';
-import BottomNav from './components/BottomNav';
-import { sampleProfiles } from './data/profiles';
+import React, { useState, useEffect } from 'react';
+import ProfilesView from './ProfilesView';
+import ProfileDetailView from './ProfileDetailView';
+import ChatListView from './ChatListView';
+import ChatDetailView from './ChatDetailView';
+import BottomNav from './BottomNav';
+import Toast from './Toast';
+import { sampleProfiles } from '../data/profiles';
+
+// localStorage 헬퍼 함수
+const loadFromLocalStorage = (key, defaultValue) => {
+  try {
+    const saved = localStorage.getItem(key);
+    return saved ? JSON.parse(saved) : defaultValue;
+  } catch (error) {
+    console.error(`Error loading ${key} from localStorage:`, error);
+    return defaultValue;
+  }
+};
+
+const saveToLocalStorage = (key, value) => {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    console.error(`Error saving ${key} to localStorage:`, error);
+  }
+};
 
 function App() {
   const [currentView, setCurrentView] = useState('profiles');
-  const [currentProfileIndex, setCurrentProfileIndex] = useState(0);
-  const [likedProfiles, setLikedProfiles] = useState([]);
-  const [matches, setMatches] = useState([]);
+  const [currentProfileIndex, setCurrentProfileIndex] = useState(
+    loadFromLocalStorage('currentProfileIndex', 0)
+  );
+  const [likedProfiles, setLikedProfiles] = useState(
+    loadFromLocalStorage('likedProfiles', [])
+  );
+  const [passedProfiles, setPassedProfiles] = useState(
+    loadFromLocalStorage('passedProfiles', [])
+  );
+  const [matches, setMatches] = useState(
+    loadFromLocalStorage('matches', [])
+  );
   const [selectedChat, setSelectedChat] = useState(null);
-  const [chatMessages, setChatMessages] = useState({});
+  const [chatMessages, setChatMessages] = useState(
+    loadFromLocalStorage('chatMessages', {})
+  );
+  const [toast, setToast] = useState(null);
 
-  const currentProfile = sampleProfiles[currentProfileIndex];
+  // 상태 변경 시 자동으로 localStorage에 저장
+  useEffect(() => {
+    saveToLocalStorage('currentProfileIndex', currentProfileIndex);
+  }, [currentProfileIndex]);
+
+  useEffect(() => {
+    saveToLocalStorage('likedProfiles', likedProfiles);
+  }, [likedProfiles]);
+
+  useEffect(() => {
+    saveToLocalStorage('passedProfiles', passedProfiles);
+  }, [passedProfiles]);
+
+  useEffect(() => {
+    saveToLocalStorage('matches', matches);
+  }, [matches]);
+
+  useEffect(() => {
+    saveToLocalStorage('chatMessages', chatMessages);
+  }, [chatMessages]);
+
+  // 이미 본 프로필(좋아요 + 패스) 필터링
+  const getAvailableProfiles = () => {
+    const seenIds = [...likedProfiles, ...passedProfiles];
+    return sampleProfiles.filter(profile => !seenIds.includes(profile.id));
+  };
+
+  const availableProfiles = getAvailableProfiles();
+  const currentProfile = availableProfiles.length > 0
+    ? availableProfiles[currentProfileIndex % availableProfiles.length]
+    : null;
 
   const handleLike = () => {
-    const profile = sampleProfiles[currentProfileIndex];
-    setLikedProfiles([...likedProfiles, profile.id]);
-    
+    if (!currentProfile) return;
+
+    setLikedProfiles([...likedProfiles, currentProfile.id]);
+
     // 50% 확률로 매칭
     if (Math.random() > 0.5) {
-      setMatches([...matches, profile]);
-      alert(`🎉 ${profile.name}님과 매칭되었습니다!`);
+      setMatches([...matches, currentProfile]);
+      setToast(`🎉 ${currentProfile.name}님과 매칭되었습니다!`);
     }
-    
+
     nextProfile();
   };
 
   const handlePass = () => {
+    if (!currentProfile) return;
+
+    setPassedProfiles([...passedProfiles, currentProfile.id]);
     nextProfile();
   };
 
   const nextProfile = () => {
-    if (currentProfileIndex < sampleProfiles.length - 1) {
+    const available = getAvailableProfiles();
+    if (available.length > 1) {
       setCurrentProfileIndex(currentProfileIndex + 1);
-    } else {
+    } else if (available.length === 1) {
+      // 마지막 프로필이면 리셋
       setCurrentProfileIndex(0);
     }
   };
@@ -128,6 +196,13 @@ function App() {
           currentView={currentView}
           matchCount={matches.length}
           onNavigate={setCurrentView}
+        />
+      )}
+
+      {toast && (
+        <Toast
+          message={toast}
+          onClose={() => setToast(null)}
         />
       )}
     </div>
