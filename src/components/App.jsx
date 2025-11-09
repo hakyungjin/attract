@@ -3,9 +3,13 @@ import ProfilesView from './ProfilesView';
 import ProfileDetailView from './ProfileDetailView';
 import ChatListView from './ChatListView';
 import ChatDetailView from './ChatDetailView';
+import MyProfileView from './MyProfileView';
 import BottomNav from './BottomNav';
 import Toast from './Toast';
+import LoginView from './LoginView';
+import SignupView from './SignupView';
 import { sampleProfiles } from '../data/profiles';
+import { getCurrentUser, login, signup, logout, createDemoUser } from '../utils/auth';
 
 // localStorage 헬퍼 함수
 const loadFromLocalStorage = (key, defaultValue) => {
@@ -27,6 +31,10 @@ const saveToLocalStorage = (key, value) => {
 };
 
 function App() {
+  // 인증 상태
+  const [currentUser, setCurrentUser] = useState(getCurrentUser());
+  const [authView, setAuthView] = useState('login'); // 'login' or 'signup'
+
   const [currentView, setCurrentView] = useState('profiles');
   const [currentProfileIndex, setCurrentProfileIndex] = useState(
     loadFromLocalStorage('currentProfileIndex', 0)
@@ -45,6 +53,11 @@ function App() {
     loadFromLocalStorage('chatMessages', {})
   );
   const [toast, setToast] = useState(null);
+
+  // 앱 초기화 시 데모 사용자 생성
+  useEffect(() => {
+    createDemoUser();
+  }, []);
 
   // 상태 변경 시 자동으로 localStorage에 저장
   useEffect(() => {
@@ -147,6 +160,60 @@ function App() {
     }, 1000);
   };
 
+  // 로그인 처리
+  const handleLogin = (email, password) => {
+    const result = login(email, password);
+    if (result.success) {
+      setCurrentUser(result.user);
+      setToast(`환영합니다, ${result.user.name}님!`);
+    }
+    return result;
+  };
+
+  // 회원가입 처리
+  const handleSignup = (userData) => {
+    const result = signup(userData);
+    if (result.success) {
+      setCurrentUser(result.user);
+      setToast(`가입을 환영합니다, ${result.user.name}님!`);
+      setAuthView('login');
+    }
+    return result;
+  };
+
+  // 로그아웃 처리
+  const handleLogout = () => {
+    logout();
+    setCurrentUser(null);
+    setToast('로그아웃되었습니다');
+  };
+
+  // 로그인하지 않은 경우 로그인/회원가입 화면 표시
+  if (!currentUser) {
+    return (
+      <>
+        {authView === 'login' ? (
+          <LoginView
+            onLogin={handleLogin}
+            onSwitchToSignup={() => setAuthView('signup')}
+          />
+        ) : (
+          <SignupView
+            onSignup={handleSignup}
+            onSwitchToLogin={() => setAuthView('login')}
+          />
+        )}
+        {toast && (
+          <Toast
+            message={toast}
+            onClose={() => setToast(null)}
+          />
+        )}
+      </>
+    );
+  }
+
+  // 로그인한 사용자 - 메인 앱 표시
   return (
     <div className="h-screen flex flex-col bg-white">
       <div className="flex-1 overflow-hidden">
@@ -187,6 +254,13 @@ function App() {
             messages={chatMessages[selectedChat.id] || []}
             onBack={() => setCurrentView('chat')}
             onSendMessage={handleSendMessage}
+          />
+        )}
+
+        {currentView === 'my-profile' && (
+          <MyProfileView
+            user={currentUser}
+            onLogout={handleLogout}
           />
         )}
       </div>

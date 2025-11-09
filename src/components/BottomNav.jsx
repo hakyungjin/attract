@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, MessageCircle } from 'lucide-react';
+import { Heart, MessageCircle, User } from 'lucide-react';
 
 function BottomNav({ currentView, matchCount, onNavigate }) {
   return (
@@ -27,10 +27,21 @@ function BottomNav({ currentView, matchCount, onNavigate }) {
           <MessageCircle className="w-6 h-6" />
           <span className="text-xs font-medium">메시지</span>
           {matchCount > 0 && (
-            <span className="absolute top-2 right-1/3 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+            <span className="absolute top-2 right-1/4 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
               {matchCount}
             </span>
           )}
+        </button>
+        <button
+          onClick={() => onNavigate('my-profile')}
+          className={`flex-1 py-4 flex flex-col items-center gap-1 transition ${
+            currentView === 'my-profile'
+              ? 'text-pink-500'
+              : 'text-gray-400 hover:text-gray-600'
+          }`}
+        >
+          <User className="w-6 h-6" />
+          <span className="text-xs font-medium">내정보</span>
         </button>
       </div>
     </div>
