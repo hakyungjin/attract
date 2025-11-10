@@ -3,8 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- 모바일 웹뷰 최적화 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+
+    <!-- iOS Safari 최적화 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="💕 만남" />
+
+    <!-- Android Chrome 최적화 -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#ec4899" />
+
+    <!-- 화면 회전 방지 (선택사항) -->
+    <meta name="screen-orientation" content="portrait" />
+
     <title>💕 소개팅 앱</title>
+
+    <style>
+      /* 모바일 웹뷰에서 텍스트 선택 방지 */
+      body {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+        /* 오버스크롤 방지 */
+        overscroll-behavior: none;
+      }
+
+      /* iOS Safari에서 상단/하단 바 고려 */
+      #root {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
