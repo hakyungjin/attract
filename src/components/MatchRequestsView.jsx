@@ -5,30 +5,43 @@ function MatchRequestsView({ currentUser, onAccept, onReject, receivedRequests, 
   const [activeTab, setActiveTab] = useState('received'); // received | sent
 
   return (
-    <div className="h-full flex flex-col bg-gray-50">
-      <div className="bg-gradient-to-r from-pink-500 to-rose-500 text-white p-4 shadow-lg">
-        <h1 className="text-2xl font-bold">💌 매칭 요청</h1>
+    <div className="h-full flex flex-col" style={{ background: 'linear-gradient(135deg, #FFF5F8 0%, #F0E6FF 100%)' }}>
+      <div className="p-6" style={{ background: 'linear-gradient(135deg, #FF6B9D 0%, #C239C2 100%)' }}>
+        <h1 className="text-2xl font-bold text-white">💌 매칭 요청</h1>
+        <p className="text-sm text-white/90 mt-1">새로운 인연을 확인하세요</p>
       </div>
 
       {/* 탭 */}
-      <div className="bg-white border-b flex">
+      <div className="bg-white/50 backdrop-blur-sm flex p-2 gap-2">
         <button
           onClick={() => setActiveTab('received')}
-          className={`flex-1 py-3 font-medium transition ${
+          className={`flex-1 py-3 rounded-full font-semibold transition-all ${
             activeTab === 'received'
-              ? 'text-pink-500 border-b-2 border-pink-500'
-              : 'text-gray-500'
+              ? 'shadow-lg scale-105'
+              : ''
           }`}
+          style={{
+            background: activeTab === 'received'
+              ? 'linear-gradient(135deg, #FF6B9D 0%, #C239C2 100%)'
+              : 'white',
+            color: activeTab === 'received' ? 'white' : '#666'
+          }}
         >
           받은 요청 ({receivedRequests.length})
         </button>
         <button
           onClick={() => setActiveTab('sent')}
-          className={`flex-1 py-3 font-medium transition ${
+          className={`flex-1 py-3 rounded-full font-semibold transition-all ${
             activeTab === 'sent'
-              ? 'text-pink-500 border-b-2 border-pink-500'
-              : 'text-gray-500'
+              ? 'shadow-lg scale-105'
+              : ''
           }`}
+          style={{
+            background: activeTab === 'sent'
+              ? 'linear-gradient(135deg, #FF6B9D 0%, #C239C2 100%)'
+              : 'white',
+            color: activeTab === 'sent' ? 'white' : '#666'
+          }}
         >
           보낸 요청 ({sentRequests.length})
         </button>
@@ -39,52 +52,62 @@ function MatchRequestsView({ currentUser, onAccept, onReject, receivedRequests, 
         {activeTab === 'received' ? (
           // 받은 요청
           receivedRequests.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-full text-gray-400">
-              <Heart className="w-20 h-20 mb-4" />
-              <p className="text-lg">받은 매칭 요청이 없습니다</p>
+            <div className="flex flex-col items-center justify-center h-full">
+              <div className="bg-white rounded-3xl p-8 shadow-lg">
+                <Heart className="w-16 h-16 mx-auto mb-4" style={{ color: '#FFB6D9' }} />
+                <p className="text-lg font-semibold text-gray-700">받은 매칭 요청이 없습니다</p>
+              </div>
             </div>
           ) : (
             <div className="p-4 space-y-4">
               {receivedRequests.map((request) => (
                 <div
                   key={request.id}
-                  className="bg-white rounded-2xl shadow-lg overflow-hidden"
+                  className="bg-white rounded-3xl overflow-hidden"
+                  style={{ boxShadow: '0 8px 30px rgba(255, 107, 157, 0.15)' }}
                 >
-                  <div className="p-4">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                  <div className="p-5">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div
+                        className="w-20 h-20 rounded-full flex items-center justify-center text-white text-3xl font-bold"
+                        style={{ background: 'linear-gradient(135deg, #FF6B9D 0%, #C239C2 100%)' }}
+                      >
                         {request.toProfile?.name?.charAt(0) || '?'}
                       </div>
                       <div className="flex-1">
-                        <h3 className="font-bold text-lg">
+                        <h3 className="font-bold text-xl mb-1" style={{ color: '#2D2D2D' }}>
                           {request.toProfile?.name || '알 수 없음'}
                         </h3>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm font-medium" style={{ color: '#8E8E93' }}>
                           {request.toProfile?.age}세 • {request.toProfile?.location}
                         </p>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm font-medium" style={{ color: '#8E8E93' }}>
                           {request.toProfile?.job}
                         </p>
                       </div>
                     </div>
 
                     {request.toProfile?.bio && (
-                      <p className="text-gray-700 mb-4 text-sm">
-                        {request.toProfile.bio}
-                      </p>
+                      <div className="mb-4 p-3 rounded-2xl" style={{ background: '#FFF0F6' }}>
+                        <p className="text-sm leading-relaxed" style={{ color: '#2D2D2D' }}>
+                          {request.toProfile.bio}
+                        </p>
+                      </div>
                     )}
 
-                    <div className="flex gap-2">
+                    <div className="flex gap-3">
                       <button
                         onClick={() => onReject(request.id)}
-                        className="flex-1 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl font-semibold transition flex items-center justify-center gap-2"
+                        className="flex-1 py-3.5 bg-gray-100 hover:bg-gray-200 rounded-2xl font-semibold transition-all flex items-center justify-center gap-2"
+                        style={{ color: '#666' }}
                       >
                         <X className="w-5 h-5" />
                         거절
                       </button>
                       <button
                         onClick={() => onAccept(request)}
-                        className="flex-1 py-3 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white rounded-xl font-semibold transition flex items-center justify-center gap-2"
+                        className="flex-1 py-3.5 text-white rounded-2xl font-semibold transition-all hover:scale-105 flex items-center justify-center gap-2 shadow-lg"
+                        style={{ background: 'linear-gradient(135deg, #FF6B9D 0%, #C239C2 100%)' }}
                       >
                         <Heart className="w-5 h-5 fill-current" />
                         수락
@@ -98,40 +121,49 @@ function MatchRequestsView({ currentUser, onAccept, onReject, receivedRequests, 
         ) : (
           // 보낸 요청
           sentRequests.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-full text-gray-400">
-              <Clock className="w-20 h-20 mb-4" />
-              <p className="text-lg">보낸 매칭 요청이 없습니다</p>
+            <div className="flex flex-col items-center justify-center h-full">
+              <div className="bg-white rounded-3xl p-8 shadow-lg">
+                <Clock className="w-16 h-16 mx-auto mb-4" style={{ color: '#FFB6D9' }} />
+                <p className="text-lg font-semibold text-gray-700">보낸 매칭 요청이 없습니다</p>
+              </div>
             </div>
           ) : (
-            <div className="p-4 space-y-4">
+            <div className="p-4 space-y-3">
               {sentRequests.map((request) => (
                 <div
                   key={request.id}
-                  className="bg-white rounded-2xl shadow p-4"
+                  className="bg-white rounded-2xl p-4"
+                  style={{ boxShadow: '0 4px 15px rgba(255, 107, 157, 0.1)' }}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white font-bold">
+                    <div
+                      className="w-14 h-14 rounded-full flex items-center justify-center text-white text-xl font-bold"
+                      style={{ background: 'linear-gradient(135deg, #FF6B9D 0%, #C239C2 100%)' }}
+                    >
                       {request.toProfile?.name?.charAt(0) || '?'}
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-semibold">
+                      <h3 className="font-semibold text-lg" style={{ color: '#2D2D2D' }}>
                         {request.toProfile?.name || '알 수 없음'}
                       </h3>
-                      <p className="text-sm text-gray-500">
-                        {request.status === 'pending' && '대기 중'}
-                        {request.status === 'accepted' && '수락됨'}
-                        {request.status === 'rejected' && '거절됨'}
+                      <p className="text-sm font-medium" style={{
+                        color: request.status === 'pending' ? '#FF8C42' :
+                               request.status === 'accepted' ? '#4CAF50' : '#F44336'
+                      }}>
+                        {request.status === 'pending' && '⏱️ 대기 중'}
+                        {request.status === 'accepted' && '✅ 수락됨'}
+                        {request.status === 'rejected' && '❌ 거절됨'}
                       </p>
                     </div>
                     <div>
                       {request.status === 'pending' && (
-                        <Clock className="w-5 h-5 text-gray-400" />
+                        <Clock className="w-6 h-6" style={{ color: '#FF8C42' }} />
                       )}
                       {request.status === 'accepted' && (
-                        <UserCheck className="w-5 h-5 text-green-500" />
+                        <UserCheck className="w-6 h-6" style={{ color: '#4CAF50' }} />
                       )}
                       {request.status === 'rejected' && (
-                        <X className="w-5 h-5 text-red-500" />
+                        <X className="w-6 h-6" style={{ color: '#F44336' }} />
                       )}
                     </div>
                   </div>

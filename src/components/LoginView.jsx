@@ -22,19 +22,25 @@ function LoginView({ onLogin, onSwitchToSignup }) {
   };
 
   return (
-    <div className="h-full flex flex-col bg-gradient-to-br from-pink-50 to-rose-50">
-      <div className="flex-1 flex items-center justify-center p-4">
+    <div className="h-full flex flex-col" style={{ background: 'linear-gradient(135deg, #FFF5F8 0%, #F0E6FF 100%)' }}>
+      <div className="flex-1 flex items-center justify-center p-6">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full mb-4">
-              <Heart className="w-10 h-10 text-white fill-current" />
+            <div
+              className="inline-flex items-center justify-center w-24 h-24 rounded-full mb-4"
+              style={{
+                background: 'linear-gradient(135deg, #FF6B9D 0%, #C239C2 100%)',
+                boxShadow: '0 8px 30px rgba(255, 107, 157, 0.3)'
+              }}
+            >
+              <Heart className="w-12 h-12 text-white fill-current" />
             </div>
-            <h1 className="text-4xl font-bold text-gray-800 mb-2">💕 만남</h1>
-            <p className="text-gray-600">특별한 인연을 만나보세요</p>
+            <h1 className="text-4xl font-bold mb-2" style={{ color: '#2D2D2D' }}>💕 하루야</h1>
+            <p className="text-lg" style={{ color: '#8E8E93' }}>특별한 인연을 만나보세요</p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-xl p-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">로그인</h2>
+          <div className="bg-white/90 backdrop-blur-xl rounded-3xl p-8" style={{ boxShadow: '0 10px 40px rgba(255, 107, 157, 0.2)' }}>
+            <h2 className="text-2xl font-bold mb-6" style={{ color: '#2D2D2D' }}>로그인</h2>
 
             {error && (
               <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 rounded-lg text-sm">
@@ -77,7 +83,11 @@ function LoginView({ onLogin, onSwitchToSignup }) {
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white py-3 rounded-lg font-semibold transition shadow-lg"
+                className="w-full text-white py-4 rounded-2xl font-bold transition-all hover:scale-105"
+                style={{
+                  background: 'linear-gradient(135deg, #FF6B9D 0%, #C239C2 100%)',
+                  boxShadow: '0 8px 25px rgba(255, 107, 157, 0.3)'
+                }}
               >
                 로그인
               </button>
