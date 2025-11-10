@@ -3,8 +3,8 @@ import { Heart, MessageCircle } from 'lucide-react';
 
 function ChatListView({ matches, chatMessages, onSelectChat }) {
   return (
-    <div className="h-full flex flex-col" style={{ background: 'linear-gradient(135deg, #FFF5F8 0%, #F0E6FF 100%)' }}>
-      <div className="p-6" style={{ background: 'linear-gradient(135deg, #FF6B9D 0%, #C239C2 100%)' }}>
+    <div className="h-full flex flex-col" style={{ background: 'linear-gradient(135deg, #F0F8FF 0%, #E3F2FD 100%)' }}>
+      <div className="p-6" style={{ background: 'linear-gradient(135deg, #64B5F6 0%, #42A5F5 100%)' }}>
         <h1 className="text-2xl font-bold text-white">💬 채팅</h1>
         <p className="text-sm text-white/90 mt-1">매칭된 사람들과 대화하세요</p>
       </div>
@@ -13,7 +13,7 @@ function ChatListView({ matches, chatMessages, onSelectChat }) {
         {matches.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full">
             <div className="bg-white rounded-3xl p-8 shadow-lg">
-              <MessageCircle className="w-16 h-16 mx-auto mb-4" style={{ color: '#FFB6D9' }} />
+              <MessageCircle className="w-16 h-16 mx-auto mb-4" style={{ color: '#90CAF9' }} />
               <p className="text-lg font-semibold text-gray-700">아직 매칭된 사람이 없습니다</p>
               <p className="text-sm text-gray-500 mt-2">프로필에 하트를 보내보세요!</p>
             </div>
@@ -25,7 +25,7 @@ function ChatListView({ matches, chatMessages, onSelectChat }) {
                 key={match.id}
                 onClick={() => onSelectChat(match)}
                 className="bg-white rounded-2xl p-4 cursor-pointer hover:scale-[1.02] transition-all flex items-center gap-4"
-                style={{ boxShadow: '0 4px 15px rgba(255, 107, 157, 0.1)' }}
+                style={{ boxShadow: '0 4px 15px rgba(100, 181, 246, 0.1)' }}
               >
                 <div
                   className="w-16 h-16 rounded-full bg-cover bg-center flex-shrink-0"
@@ -40,7 +40,7 @@ function ChatListView({ matches, chatMessages, onSelectChat }) {
                     {chatMessages[match.id]?.slice(-1)[0]?.text || "매칭되었습니다! 인사해보세요 👋"}
                   </p>
                 </div>
-                <Heart className="w-6 h-6 fill-current flex-shrink-0" style={{ color: '#FF6B9D' }} />
+                <Heart className="w-6 h-6 fill-current flex-shrink-0" style={{ color: '#64B5F6' }} />
               </div>
             ))}
           </div>

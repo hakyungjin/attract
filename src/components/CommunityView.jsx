@@ -26,8 +26,8 @@ function CommunityView({ posts, onPostClick, onCreatePost, currentCategory, onCa
   };
 
   return (
-    <div className="h-full flex flex-col" style={{ background: 'linear-gradient(135deg, #FFF5F8 0%, #F0E6FF 100%)' }}>
-      <div className="p-6" style={{ background: 'linear-gradient(135deg, #FF6B9D 0%, #C239C2 100%)' }}>
+    <div className="h-full flex flex-col" style={{ background: 'linear-gradient(135deg, #F0F8FF 0%, #E3F2FD 100%)' }}>
+      <div className="p-6" style={{ background: 'linear-gradient(135deg, #64B5F6 0%, #42A5F5 100%)' }}>
         <h1 className="text-2xl font-bold text-white">💬 커뮤니티</h1>
         <p className="text-sm text-white/90 mt-1">자유롭게 이야기를 나눠요</p>
       </div>
@@ -47,7 +47,7 @@ function CommunityView({ posts, onPostClick, onCreatePost, currentCategory, onCa
                 }`}
                 style={{
                   background: isActive
-                    ? 'linear-gradient(135deg, #FF6B9D 0%, #C239C2 100%)'
+                    ? 'linear-gradient(135deg, #64B5F6 0%, #42A5F5 100%)'
                     : 'white',
                   color: isActive ? 'white' : '#666'
                 }}
@@ -65,7 +65,7 @@ function CommunityView({ posts, onPostClick, onCreatePost, currentCategory, onCa
         {posts.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full">
             <div className="bg-white rounded-3xl p-8 shadow-lg">
-              <MessageSquare className="w-16 h-16 mx-auto mb-4" style={{ color: '#FFB6D9' }} />
+              <MessageSquare className="w-16 h-16 mx-auto mb-4" style={{ color: '#90CAF9' }} />
               <p className="text-lg font-semibold text-gray-700">게시글이 없습니다</p>
               <p className="text-sm text-gray-500 mt-2">첫 번째 게시글을 작성해보세요!</p>
             </div>
@@ -74,10 +74,10 @@ function CommunityView({ posts, onPostClick, onCreatePost, currentCategory, onCa
           <div className="p-4 space-y-4">
             {posts.map((post, index) => {
               const colors = [
-                { bg: '#FFF0F6', border: '#FFB6D9' },
-                { bg: '#FFF8E1', border: '#FFE082' },
-                { bg: '#F3E5F5', border: '#CE93D8' },
-                { bg: '#E8F5E9', border: '#A5D6A7' }
+                { bg: '#E3F2FD', border: '#90CAF9' },
+                { bg: '#E0F7FA', border: '#4DD0E1' },
+                { bg: '#E1F5FE', border: '#64B5F6' },
+                { bg: '#F1F8E9', border: '#AED581' }
               ];
               const color = colors[index % colors.length];
 
@@ -95,12 +95,12 @@ function CommunityView({ posts, onPostClick, onCreatePost, currentCategory, onCa
                   <div className="flex items-center gap-2 mb-3">
                     <span className="text-xs px-3 py-1 rounded-full font-semibold"
                       style={{
-                        background: post.category === 'dating' ? '#FF6B9D' :
-                                   post.category === 'tips' ? '#FF8C42' :
-                                   post.category === 'chat' ? '#C239C2' : '#9E9E9E',
+                        background: post.category === 'dating' ? '#64B5F6' :
+                                   post.category === 'tips' ? '#4DD0E1' :
+                                   post.category === 'chat' ? '#42A5F5' : '#9E9E9E',
                         color: 'white'
                       }}>
-                      {post.category === 'dating' ? '💕 소개팅' :
+                      {post.category === 'dating' ? '💙 소개팅' :
                        post.category === 'tips' ? '💡 팁' :
                        post.category === 'chat' ? '☕ 잡담' : '📝 일반'}
                     </span>
@@ -124,7 +124,7 @@ function CommunityView({ posts, onPostClick, onCreatePost, currentCategory, onCa
                     <span className="font-semibold" style={{ color: '#666' }}>{post.userName}</span>
                     <div className="flex items-center gap-4">
                       <div className="flex items-center gap-1.5">
-                        <Heart className="w-4 h-4" style={{ color: '#FF6B9D' }} />
+                        <Heart className="w-4 h-4" style={{ color: '#64B5F6' }} />
                         <span className="font-medium" style={{ color: '#666' }}>{post.likes || 0}</span>
                       </div>
                       <div className="flex items-center gap-1.5">
@@ -144,7 +144,7 @@ function CommunityView({ posts, onPostClick, onCreatePost, currentCategory, onCa
       <button
         onClick={onCreatePost}
         className="fixed bottom-20 right-6 w-16 h-16 text-white rounded-full shadow-xl flex items-center justify-center transition-all hover:scale-110"
-        style={{ background: 'linear-gradient(135deg, #FF6B9D 0%, #C239C2 100%)' }}
+        style={{ background: 'linear-gradient(135deg, #64B5F6 0%, #42A5F5 100%)' }}
       >
         <Plus className="w-7 h-7" />
       </button>

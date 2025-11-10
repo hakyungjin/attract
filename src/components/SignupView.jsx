@@ -53,24 +53,24 @@ function SignupView({ onSignup, onSwitchToLogin }) {
   };
 
   return (
-    <div className="h-full overflow-y-auto" style={{ background: 'linear-gradient(135deg, #FFF5F8 0%, #F0E6FF 100%)' }}>
+    <div className="h-full overflow-y-auto" style={{ background: 'linear-gradient(135deg, #F0F8FF 0%, #E3F2FD 100%)' }}>
       <div className="min-h-full flex items-center justify-center p-6 py-8">
         <div className="w-full max-w-md">
           <div className="text-center mb-6">
             <div
               className="inline-flex items-center justify-center w-24 h-24 rounded-full mb-4"
               style={{
-                background: 'linear-gradient(135deg, #FF6B9D 0%, #C239C2 100%)',
-                boxShadow: '0 8px 30px rgba(255, 107, 157, 0.3)'
+                background: 'linear-gradient(135deg, #64B5F6 0%, #42A5F5 100%)',
+                boxShadow: '0 8px 30px rgba(100, 181, 246, 0.3)'
               }}
             >
               <Heart className="w-12 h-12 text-white fill-current" />
             </div>
-            <h1 className="text-4xl font-bold mb-2" style={{ color: '#2D2D2D' }}>💕 하루야</h1>
+            <h1 className="text-4xl font-bold mb-2" style={{ color: '#2D2D2D' }}>💙 하루야</h1>
             <p className="text-lg" style={{ color: '#8E8E93' }}>새로운 시작을 환영합니다</p>
           </div>
 
-          <div className="bg-white/90 backdrop-blur-xl rounded-3xl p-8" style={{ boxShadow: '0 10px 40px rgba(255, 107, 157, 0.2)' }}>
+          <div className="bg-white/90 backdrop-blur-xl rounded-3xl p-8" style={{ boxShadow: '0 10px 40px rgba(100, 181, 246, 0.2)' }}>
             <h2 className="text-2xl font-bold mb-6" style={{ color: '#2D2D2D' }}>회원가입</h2>
 
             {error && (
@@ -92,7 +92,7 @@ function SignupView({ onSignup, onSwitchToLogin }) {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                     placeholder="example@email.com"
                     required
                   />
@@ -111,7 +111,7 @@ function SignupView({ onSignup, onSwitchToLogin }) {
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                     placeholder="6자 이상"
                     required
                   />
@@ -130,7 +130,7 @@ function SignupView({ onSignup, onSwitchToLogin }) {
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                     placeholder="비밀번호를 다시 입력하세요"
                     required
                   />
@@ -149,7 +149,7 @@ function SignupView({ onSignup, onSwitchToLogin }) {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                     placeholder="홍길동"
                     required
                   />
@@ -168,7 +168,7 @@ function SignupView({ onSignup, onSwitchToLogin }) {
                     name="age"
                     value={formData.age}
                     onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                     placeholder="25"
                     min="19"
                     max="100"
@@ -188,7 +188,7 @@ function SignupView({ onSignup, onSwitchToLogin }) {
                     name="location"
                     value={formData.location}
                     onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                     placeholder="서울 강남구"
                   />
                 </div>
@@ -206,7 +206,7 @@ function SignupView({ onSignup, onSwitchToLogin }) {
                     name="job"
                     value={formData.job}
                     onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                     placeholder="개발자"
                   />
                 </div>
@@ -221,7 +221,7 @@ function SignupView({ onSignup, onSwitchToLogin }) {
                   name="bio"
                   value={formData.bio}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                   placeholder="자신을 소개해주세요..."
                   rows="3"
                 />
@@ -231,8 +231,8 @@ function SignupView({ onSignup, onSwitchToLogin }) {
                 type="submit"
                 className="w-full text-white py-4 rounded-2xl font-bold transition-all hover:scale-105"
                 style={{
-                  background: 'linear-gradient(135deg, #FF6B9D 0%, #C239C2 100%)',
-                  boxShadow: '0 8px 25px rgba(255, 107, 157, 0.3)'
+                  background: 'linear-gradient(135deg, #64B5F6 0%, #42A5F5 100%)',
+                  boxShadow: '0 8px 25px rgba(100, 181, 246, 0.3)'
                 }}
               >
                 가입하기
@@ -244,7 +244,7 @@ function SignupView({ onSignup, onSwitchToLogin }) {
                 이미 계정이 있으신가요?{' '}
                 <button
                   onClick={onSwitchToLogin}
-                  className="text-pink-500 font-semibold hover:text-pink-600"
+                  className="text-blue-500 font-semibold hover:text-blue-600"
                 >
                   로그인
                 </button>

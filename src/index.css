@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 :root {
-  /* 메인 브랜드 컬러 - 핑크/퍼플 그라디언트 */
-  --primary-pink: #FF6B9D;
-  --primary-purple: #C239C2;
-  --secondary-pink: #FFB6D9;
-  --light-pink: #FFF0F6;
-  --accent-orange: #FF8C42;
+  /* 메인 브랜드 컬러 - 청순한 블루 */
+  --primary-blue: #64B5F6;
+  --primary-sky: #42A5F5;
+  --secondary-blue: #90CAF9;
+  --light-blue: #E3F2FD;
+  --accent-cyan: #4DD0E1;
 
   /* 배경 */
-  --bg-gradient-start: #FFF5F8;
-  --bg-gradient-end: #F0E6FF;
+  --bg-gradient-start: #F0F8FF;
+  --bg-gradient-end: #E3F2FD;
 
   /* 텍스트 */
   --text-primary: #2D2D2D;
@@ -20,8 +20,8 @@
   --text-white: #FFFFFF;
 
   /* 카드 */
-  --card-shadow: 0 4px 20px rgba(255, 107, 157, 0.15);
-  --card-shadow-hover: 0 8px 30px rgba(255, 107, 157, 0.25);
+  --card-shadow: 0 4px 20px rgba(100, 181, 246, 0.15);
+  --card-shadow-hover: 0 8px 30px rgba(100, 181, 246, 0.25);
 }
 
 body {

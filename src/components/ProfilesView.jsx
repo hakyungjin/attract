@@ -30,9 +30,9 @@ function ProfilesView({ currentProfile, currentProfileIndex, totalProfiles, onLi
   // 모든 프로필을 다 본 경우
   if (!currentProfile) {
     return (
-      <div className="h-full flex flex-col" style={{ background: 'linear-gradient(135deg, #FFF5F8 0%, #F0E6FF 100%)' }}>
-        <div className="p-6" style={{ background: 'linear-gradient(135deg, #FF6B9D 0%, #C239C2 100%)' }}>
-          <h1 className="text-2xl font-bold text-white">💕 오늘의 만남</h1>
+      <div className="h-full flex flex-col" style={{ background: 'linear-gradient(135deg, #F0F8FF 0%, #E3F2FD 100%)' }}>
+        <div className="p-6" style={{ background: 'linear-gradient(135deg, #64B5F6 0%, #42A5F5 100%)' }}>
+          <h1 className="text-2xl font-bold text-white">💙 오늘의 만남</h1>
           <p className="text-sm text-white/90 mt-1">새로운 인연을 찾아보세요</p>
         </div>
         <div className="flex-1 flex items-center justify-center p-4">
@@ -47,9 +47,9 @@ function ProfilesView({ currentProfile, currentProfileIndex, totalProfiles, onLi
   }
 
   return (
-    <div className="h-full flex flex-col" style={{ background: 'linear-gradient(135deg, #FFF5F8 0%, #F0E6FF 100%)' }}>
-      <div className="p-6" style={{ background: 'linear-gradient(135deg, #FF6B9D 0%, #C239C2 100%)' }}>
-        <h1 className="text-2xl font-bold text-white">💕 오늘의 만남</h1>
+    <div className="h-full flex flex-col" style={{ background: 'linear-gradient(135deg, #F0F8FF 0%, #E3F2FD 100%)' }}>
+      <div className="p-6" style={{ background: 'linear-gradient(135deg, #64B5F6 0%, #42A5F5 100%)' }}>
+        <h1 className="text-2xl font-bold text-white">💙 오늘의 만남</h1>
         <p className="text-sm text-white/90 mt-1">새로운 인연을 찾아보세요</p>
       </div>
 
@@ -60,7 +60,7 @@ function ProfilesView({ currentProfile, currentProfileIndex, totalProfiles, onLi
             style={{
               transform: `translateX(${dragOffset}px) rotate(${dragOffset * 0.05}deg)`,
               opacity: 1 - Math.abs(dragOffset) / 400,
-              boxShadow: '0 10px 40px rgba(255, 107, 157, 0.2)'
+              boxShadow: '0 10px 40px rgba(100, 181, 246, 0.2)'
             }}
             onTouchStart={(e) => handleDragStart(e.touches[0].clientX)}
             onTouchMove={(e) => handleDragMove(e.touches[0].clientX)}
@@ -76,7 +76,7 @@ function ProfilesView({ currentProfile, currentProfileIndex, totalProfiles, onLi
               onClick={onViewDetail}
             >
               <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
-                <span className="text-sm font-semibold" style={{ color: '#FF6B9D' }}>
+                <span className="text-sm font-semibold" style={{ color: '#64B5F6' }}>
                   {currentProfileIndex + 1} / {totalProfiles}
                 </span>
               </div>
@@ -106,7 +106,7 @@ function ProfilesView({ currentProfile, currentProfileIndex, totalProfiles, onLi
               <button
                 onClick={onLike}
                 className="w-20 h-20 rounded-full flex items-center justify-center transition-all hover:scale-110 shadow-xl"
-                style={{ background: 'linear-gradient(135deg, #FF6B9D 0%, #C239C2 100%)' }}
+                style={{ background: 'linear-gradient(135deg, #64B5F6 0%, #42A5F5 100%)' }}
               >
                 <Heart className="w-10 h-10 text-white fill-current" />
               </button>
